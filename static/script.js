@@ -79,8 +79,15 @@ function loadConfigurations() {
             var configDropdown = document.getElementById('config-dropdown');
             configDropdown.innerHTML = ''; // Clear the existing list
 
+            // Filter configurations by grade
+            var gradeFilter = document.getElementById('grade-filter').value;
+            var filteredData = data.filter(config => gradeFilter === "" || config.grade === gradeFilter);
+
+            // Sort configurations alphabetically
+            filteredData.sort((a, b) => a.name.localeCompare(b.name));
+
             // Populate the dropdown with saved configurations
-            data.forEach(config => {
+            filteredData.forEach(config => {
                 var option = document.createElement('option');
                 option.value = config.name;
                 option.textContent = `${config.grade} - ${config.name}`;
