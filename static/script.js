@@ -1,6 +1,16 @@
 function circleClick(buttonNumber) {
     var button = document.getElementById('button' + buttonNumber);
-    button.classList.toggle('illuminated');
+    if (button.classList.contains('illuminated-yellow')) {
+        button.classList.remove('illuminated-yellow');
+        button.classList.add('illuminated-blue');
+    } else if (button.classList.contains('illuminated-blue')) {
+        button.classList.remove('illuminated-blue');
+        button.classList.add('illuminated-red');
+    } else if (button.classList.contains('illuminated-red')) {
+        button.classList.remove('illuminated-red');
+    } else {
+        button.classList.add('illuminated-yellow');
+    }
 }
 
 function saveConfiguration() {
@@ -13,10 +23,22 @@ function saveConfiguration() {
         return;
     }
 
-    var illuminatedButtons = document.querySelectorAll('.illuminated');
-    var illuminatedButtonsArray = Array.from(illuminatedButtons).map(button => {
-        return button.id.replace('button', '');
-    });
+    var illuminatedButtonsYellow = document.querySelectorAll('.illuminated-yellow');
+    var illuminatedButtonsBlue = document.querySelectorAll('.illuminated-blue');
+    var illuminatedButtonsRed = document.querySelectorAll('.illuminated-red');
+
+    if (illuminatedButtonsBlue.length != 2 || illuminatedButtonsRed.length != 1) {
+        alert('You must have exactly 2 blue highlights and 1 red highlight.');
+        return;
+    }
+
+    var illuminatedButtonsArray = Array.from(illuminatedButtonsYellow).map(button => {
+        return { id: button.id.replace('button', ''), color: 'yellow' };
+    }).concat(Array.from(illuminatedButtonsBlue).map(button => {
+        return { id: button.id.replace('button', ''), color: 'blue' };
+    })).concat(Array.from(illuminatedButtonsRed).map(button => {
+        return { id: button.id.replace('button', ''), color: 'red' };
+    }));
 
     var configuration = {
         name: configName,
@@ -43,9 +65,9 @@ function saveConfiguration() {
 }
 
 function clearGrid() {
-    var illuminatedButtons = document.querySelectorAll('.illuminated');
+    var illuminatedButtons = document.querySelectorAll('.illuminated-yellow, .illuminated-blue, .illuminated-red');
     illuminatedButtons.forEach(button => {
-        button.classList.remove('illuminated');
+        button.classList.remove('illuminated-yellow', 'illuminated-blue', 'illuminated-red');
     });
 }
 
@@ -84,8 +106,9 @@ function loadConfiguration() {
         .then(response => response.json())
         .then(data => {
             clearGrid(); // Clear existing illumination
-            data.buttons.forEach(buttonNumber => {
-                circleClick(buttonNumber); // Illuminate the buttons from the loaded configuration
+            data.buttons.forEach(button => {
+                var buttonElement = document.getElementById('button' + button.id);
+                buttonElement.classList.add('illuminated-' + button.color); // Illuminate the buttons from the loaded configuration
             });
         })
         .catch(error => {

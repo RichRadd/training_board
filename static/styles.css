@@ -6,8 +6,16 @@ button {
     transition: background-color 0.3s ease;
 }
 
-.illuminated {
+.illuminated-yellow {
     background-color: yellow;
+}
+
+.illuminated-blue {
+    background-color: blue;
+}
+
+.illuminated-red {
+    background-color: red;
 }
 
 #config-name-input, #grade-input {
