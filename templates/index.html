@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radd Training Board</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+    #button-container {
+        display: grid;
+        grid-template-columns: repeat({{ cols }}, 30px);
+        gap: 5px;
+        width: {{ cols * 30 + (cols - 1) * 5 }}px;
+    }
+    </style>
+</head>
+    <body>
+    <label for="config-name-input">Configuration Name:</label>
+    <input type="text" id="config-name-input" placeholder="Enter configuration name">
+
+    <label for="grade-input">Grade:</label>
+    <select id="grade-input">
+        <option value="V0">V0</option>
+        <option value="V1">V1</option>
+        <option value="V2">V2</option>
+        <option value="V3">V3</option>
+        <option value="V4">V4</option>
+        <option value="V5">V5</option>
+        <option value="V6">V6</option>
+        <option value="V7">V7</option>
+        <option value="V8">V8</option>
+        <option value="V9">V9</option>
+        <option value="V10">V10</option>
+        <option value="V11">V11</option>
+        <option value="V12">V12</option>
+        <option value="V13">V13</option>
+        <option value="V14">V14</option>
+        <option value="V15">V15</option>
+        <option value="V16">V16</option>
+    </select>
+
+    <div id="button-container">
+        {% for button_number in range(1, rows * cols + 1) %}
+            <button id="button{{ button_number }}" onclick="circleClick({{ button_number }})"></button>
+        {% endfor %}
+    </div>
+
+    <button id="save-button" onclick="saveConfiguration()">Save Configuration</button>
+    <button id="clear-button" onclick="clearGrid()">Clear Grid</button>
+
+    <div id="config-list">
+        <h3>Saved Configurations:</h3>
+        <select id="config-dropdown"></select>
+        <button id="load-button" onclick="loadConfiguration()">Load Configuration</button>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

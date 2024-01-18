@@ -1,0 +1,25 @@
+button {
+    width: 30px;
+    height: 30px;
+    margin: 0;
+    background-color: white;
+    transition: background-color 0.3s ease;
+}
+
+.illuminated {
+    background-color: yellow;
+}
+
+#config-name-input, #grade-input {
+    margin-bottom: 10px;
+}
+
+#config-list {
+    margin-top: 20px;
+}
+
+#save-button, #clear-button, #load-button {
+    width: auto;
+    padding: 5px 10px;
+    margin-top: 5px;
+}
