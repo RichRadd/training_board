@@ -41,11 +41,18 @@
     </select>
 
     <div id="button-container">
-        {% for button_number in range(1, rows * cols + 1) %}
-            <button id="button{{ button_number }}" onclick="circleClick({{ button_number }})"></button>
+        {% for row in range(1, rows + 1) %}
+            {% for col in range(1, cols + 1) %}
+                {% if row is even %}
+                    {% set button_number = row * cols - col + 1 %}
+                {% else %}
+                    {% set button_number = (row - 1) * cols + col %}
+                {% endif %}
+                <button id="button{{ button_number }}" onclick="circleClick({{ button_number }})"></button>
+            {% endfor %}
         {% endfor %}
     </div>
-
+    
     <button id="save-button" onclick="saveConfiguration()">Save Configuration</button>
     <button id="clear-button" onclick="clearGrid()">Clear Grid</button>
 
