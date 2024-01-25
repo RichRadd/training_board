@@ -84,6 +84,8 @@ def configure_routes(app):
     def test_configuration():
         try:
             data = request.json
+            # Print the buttons data
+            print("Buttons:", data['buttons'])
             # Light up the LEDs
             from lightled import set_leds
             print("Setting LEDs...")
