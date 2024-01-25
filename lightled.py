@@ -25,9 +25,11 @@ def set_leds(colors):
     # Set specified pixels to their colors
     for color in colors:
         try:
-            print(f"Setting LED {color['id']} to color {color['color']}")
-            strip.setPixelColor(color['id'], Color(color['color'][1], color['color'][0], color['color'][2]))
+            rgb = color['color']
+            print(f"Setting LED {color['id']} to color {rgb}")
+            color_int = Color(rgb[0], rgb[1], rgb[2])
+            strip.setPixelColor(color['id'], color_int)
             strip.show()
         except Exception as e:
-            print(f"Error setting LED {color['id']} to color {color['color']}: {e}")
+            print(f"Error setting LED {color['id']} to color {rgb}: {e}")
             raise
