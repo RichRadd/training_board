@@ -20,9 +20,9 @@ def set_leds(colors):
     # Turn off all pixels
     for i in range(strip.numPixels()):
         strip.setPixelColor(i, Color(0, 0, 0))
+        strip.show()
 
     # Set specified pixels to their colors
     for color in colors:
         strip.setPixelColor(color['id'], Color(color['color'][1], color['color'][0], color['color'][2]))
-
-    strip.show()
+        strip.show()
