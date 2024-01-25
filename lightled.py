@@ -15,7 +15,7 @@ strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, 
 # Intialize the library (must be called once before other functions).
 strip.begin()
 
-def set_leds(colors):
+def set_leds(buttons):
     """Set the LEDs to the specified colors."""
     # Turn off all pixels
     for i in range(strip.numPixels()):
@@ -23,13 +23,14 @@ def set_leds(colors):
         strip.show()
 
     # Set specified pixels to their colors
-    for color in colors:
+    for button in buttons:
         try:
-            rgb = color['color']
-            print(f"Setting LED {color['id']} to color {rgb}")
+            rgb = button['color']
+            led_id = button['id']
+            print(f"Setting LED {led_id} to color {rgb}")
             color_int = Color(rgb[0], rgb[1], rgb[2])
-            strip.setPixelColor(color['id'], color_int)
+            strip.setPixelColor(led_id, color_int)
             strip.show()
         except Exception as e:
-            print(f"Error setting LED {color['id']} to color {rgb}: {e}")
+            print(f"Error setting LED {led_id} to color {rgb}: {e}")
             raise
