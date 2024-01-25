@@ -84,8 +84,6 @@ def configure_routes(app):
     def test_configuration():
         try:
             data = request.json
-            # Print the buttons data
-            print("Buttons:", data['buttons'])
             # Convert color names to GRB values
             color_map = {'red': (0, 255, 0), 'green': (255, 0, 0), 'blue': (0, 0, 255), 'yellow': (255, 255, 0)}
             for button in data['buttons']:
@@ -96,6 +94,8 @@ def configure_routes(app):
                     raise
             # Light up the LEDs
             from lightled import set_leds
+            # Print the buttons data
+            print("Buttons:", data['buttons'])
             print("Setting LEDs...")
             set_leds(data['buttons'])
             print("LEDs set")
