@@ -24,6 +24,7 @@ def set_leds(buttons):
 
     # Set specified pixels to their colors
     for button in buttons:
+        rgb = led_id = None
         try:
             rgb = button['color']
             led_id = int(button['id'])  # Convert led_id to integer
