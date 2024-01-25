@@ -46,13 +46,13 @@
                 {% if row is even %}
                     {% set button_number = row * cols + col %}
                 {% else %}
-                    {% set button_number = (row + 1) * cols - col %}
+                    {% set button_number = (row) * cols - col %}
                 {% endif %}
                 <button id="button{{ button_number }}" onclick="circleClick({{ button_number }})"></button>
             {% endfor %}
         {% endfor %}
     </div>    
-    
+
     <button id="save-button" onclick="saveConfiguration()">Save Configuration</button>
     <button id="clear-button" onclick="clearGrid()">Clear Grid</button>
 
