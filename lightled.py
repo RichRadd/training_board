@@ -30,7 +30,9 @@ def set_leds(buttons):
             print(f"Setting LED {led_id} to color {rgb}")
             color_int = Color(rgb[0], rgb[1], rgb[2])
             strip.setPixelColor(led_id, color_int)
-            strip.show()
+
         except Exception as e:
             print(f"Error setting LED {led_id} to color {rgb}: {e}")
             raise
+
+        strip.show()
