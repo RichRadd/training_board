@@ -44,7 +44,7 @@ def configure_routes(app):
             if configuration:
                 # Convert color names to GRB values
                 color_map = {'red': (0, 255, 0), 'green': (255, 0, 0), 'blue': (0, 0, 255), 'yellow': (255, 255, 0)}
-                reverse_color_map = {(0, 255, 0): 'red', (0, 255, 0): 'green', (0, 0, 255): 'blue', (255, 255, 0): 'yellow'}
+                reverse_color_map = {(255, 0, 0): 'red', (0, 255, 0): 'green', (0, 0, 255): 'blue', (255, 255, 0): 'yellow'}
                 for button in configuration['buttons']:
                     try:
                         button['color'] = color_map[button['color']]
