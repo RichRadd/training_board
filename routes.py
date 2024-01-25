@@ -5,7 +5,7 @@ from configurations import get_configurations, save_configurations, is_unique_na
 def configure_routes(app):
     @app.route('/')
     def index():
-        rows = 15
+        rows = 20
         cols = 12
         return render_template('index.html', rows=rows, cols=cols)
 
@@ -63,42 +63,5 @@ def configure_routes(app):
                 return jsonify(configuration)
             else:
                 return jsonify({'error': 'Configuration not found'}), 404
-        except Exception as e:
-            return jsonify({'error': str(e)}), 500
-
-    @app.route('/delete_configuration/<config_name>', methods=['DELETE'])
-    def delete_configuration(config_name):
-        try:
-            configurations = get_configurations()
-            configurations = [config for config in configurations if config['name'] != config_name]
-            save_configurations(configurations)
-            return jsonify({'success': True})
-        except Exception as e:
-            return jsonify({'error': str(e)}), 500
-
-    @app.route('/delete')
-    def delete():
-        return render_template('delete.html')
-    
-    @app.route('/get_configuration/test', methods=['POST'])
-    def test_configuration():
-        try:
-            data = request.json
-            # Convert color names to GRB values
-            color_map = {'red': (0, 255, 0), 'green': (255, 0, 0), 'blue': (0, 0, 255), 'yellow': (255, 255, 0)}
-            for button in data['buttons']:
-                try:
-                    button['color'] = color_map[button['color']]
-                except KeyError:
-                    print(f"Error: Color {button['color']} not found in color_map")
-                    raise
-            # Light up the LEDs
-            from lightled import set_leds
-            # Print the buttons data
-            print("Buttons:", data['buttons'])
-            print("Setting LEDs...")
-            set_leds(data['buttons'])
-            print("LEDs set")
-            return jsonify({'success': True})
         except Exception as e:
             return jsonify({'error': str(e)}), 500

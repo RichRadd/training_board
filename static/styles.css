@@ -26,7 +26,7 @@ button {
     margin-top: 20px;
 }
 
-#save-button, #clear-button, #load-button, #test-button {
+#save-button, #clear-button, #load-button {
     width: auto;
     padding: 5px 10px;
     margin-top: 5px;

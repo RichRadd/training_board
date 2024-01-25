@@ -34,4 +34,3 @@ def set_leds(buttons):
         except Exception as e:
             print(f"Error setting LED {led_id} to color {rgb}: {e}")
             raise
-

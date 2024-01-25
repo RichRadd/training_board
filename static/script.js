@@ -123,39 +123,5 @@ function loadConfiguration() {
         });
 }
 
-function test() {
-    var illuminatedButtonsYellow = document.querySelectorAll('.illuminated-yellow');
-    var illuminatedButtonsBlue = document.querySelectorAll('.illuminated-blue');
-    var illuminatedButtonsRed = document.querySelectorAll('.illuminated-red');
-
-    var illuminatedButtonsArray = Array.from(illuminatedButtonsYellow).map(button => {
-        return { id: button.id.replace('button', ''), color: 'yellow' };
-    }).concat(Array.from(illuminatedButtonsBlue).map(button => {
-        return { id: button.id.replace('button', ''), color: 'blue' };
-    })).concat(Array.from(illuminatedButtonsRed).map(button => {
-        return { id: button.id.replace('button', ''), color: 'red' };
-    }));
-
-    var configuration = {
-        buttons: illuminatedButtonsArray
-    };
-
-    // Send the configuration to the server
-    fetch('/get_configuration/test', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(configuration),
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert('Test completed successfully.');
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-}
-
 // Load configurations on page load
 loadConfigurations();
