@@ -43,7 +43,8 @@ def configure_routes(app):
             print("Configuration:", configuration)
             if configuration:
                 # Convert color names to GRB values
-                color_map = {'red': (0, 255, 0), 'green': (0, 255, 0), 'blue': (0, 0, 255), 'yellow': (255, 255, 0)}
+                color_map = {'red': (0, 255, 0), 'green': (255, 0, 0), 'blue': (0, 0, 255), 'yellow': (255, 255, 0)}
+                reverse_color_map = {(0, 255, 0): 'red', (0, 255, 0): 'green', (0, 0, 255): 'blue', (255, 255, 0): 'yellow'}
                 for button in configuration['buttons']:
                     try:
                         button['color'] = color_map[button['color']]
@@ -55,6 +56,9 @@ def configure_routes(app):
                 print("Setting LEDs...")
                 set_leds(configuration['buttons'])
                 print("LEDs set")
+                # Convert GRB values back to color names
+                for button in configuration['buttons']:
+                    button['color'] = reverse_color_map[button['color']]
                 print("Returning configuration:", configuration)  # Print the configuration before returning it
                 return jsonify(configuration)
             else:
