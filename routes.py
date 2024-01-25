@@ -36,16 +36,25 @@ def configure_routes(app):
     @app.route('/get_configuration/<config_name>', methods=['GET'])
     def get_configuration(config_name):
         try:
+            print("Getting configurations...")
             configurations = get_configurations()
+            print("Configurations:", configurations)
             configuration = next((config for config in configurations if config['name'] == config_name), None)
+            print("Configuration:", configuration)
             if configuration:
                 # Convert color names to RGB values
-                color_map = {'red': (255, 0, 0), 'green': (0, 255, 0), 'blue': (0, 0, 255), 'yellow': (255, 255, 0)}
+                color_map = {'red': (0, 255, 0), 'green': (0, 255, 0), 'blue': (0, 0, 255), 'yellow': (255, 255, 0)}
                 for button in configuration['buttons']:
-                    button['color'] = color_map[button['color']]
+                    try:
+                        button['color'] = color_map[button['color']]
+                    except KeyError:
+                        print(f"Error: Color {button['color']} not found in color_map")
+                        raise
                 # Light up the LEDs
                 from lightled import set_leds
+                print("Setting LEDs...")
                 set_leds(configuration['buttons'])
+                print("LEDs set")
                 return jsonify(configuration)
             else:
                 return jsonify({'error': 'Configuration not found'}), 404

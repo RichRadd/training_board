@@ -110,26 +110,18 @@ function loadConfiguration() {
 
     // Fetch the selected configuration from the server
     fetch(`/get_configuration/${encodeURIComponent(selectedConfig)}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
-            if (data.error) {
-                console.error('Server error:', data.error);
-            } else {
-                clearGrid(); // Clear existing illumination
-                data.buttons.forEach(button => {
-                    var buttonElement = document.getElementById('button' + button.id);
-                    buttonElement.classList.add('illuminated-' + button.color); // Illuminate the buttons from the loaded configuration
-                });
-            }
+            clearGrid(); // Clear existing illumination
+            data.buttons.forEach(button => {
+                var buttonElement = document.getElementById('button' + button.id);
+                buttonElement.classList.add('illuminated-' + button.color); // Illuminate the buttons from the loaded configuration
+            });
         })
         .catch(error => {
             console.error('Error:', error);
         });
 }
+
 // Load configurations on page load
 loadConfigurations();
