@@ -5,8 +5,8 @@ from configurations import get_configurations, save_configurations, is_unique_na
 def configure_routes(app):
     @app.route('/')
     def index():
-        rows = 12
-        cols = 20
+        rows = 20
+        cols = 12
         return render_template('index.html', rows=rows, cols=cols)
 
     @app.route('/save_configuration', methods=['POST'])
