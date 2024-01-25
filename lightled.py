@@ -26,7 +26,7 @@ def set_leds(buttons):
     for button in buttons:
         try:
             rgb = button['color']
-            led_id = button['id']
+            led_id = int(button['id'])  # Convert led_id to integer
             print(f"Setting LED {led_id} to color {rgb}")
             color_int = Color(rgb[0], rgb[1], rgb[2])
             strip.setPixelColor(led_id, color_int)
