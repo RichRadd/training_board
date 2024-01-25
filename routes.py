@@ -5,7 +5,7 @@ from configurations import get_configurations, save_configurations, is_unique_na
 def configure_routes(app):
     @app.route('/')
     def index():
-        rows = 20
+        rows = 15
         cols = 12
         return render_template('index.html', rows=rows, cols=cols)
 
