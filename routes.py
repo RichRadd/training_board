@@ -79,3 +79,16 @@ def configure_routes(app):
     @app.route('/delete')
     def delete():
         return render_template('delete.html')
+    
+    @app.route('/get_configuration/test', methods=['POST'])
+    def test_configuration():
+        try:
+            data = request.json
+            # Light up the LEDs
+            from lightled import set_leds
+            print("Setting LEDs...")
+            set_leds(data['buttons'])
+            print("LEDs set")
+            return jsonify({'success': True})
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
