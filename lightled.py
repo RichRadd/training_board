@@ -23,6 +23,6 @@ def set_leds(colors):
 
     # Set specified pixels to their colors
     for color in colors:
-        strip.setPixelColor(color['id'], Color(color['color'][0], color['color'][1], color['color'][2]))
+        strip.setPixelColor(color['id'], Color(color['color'][1], color['color'][0], color['color'][2]))
 
     strip.show()
