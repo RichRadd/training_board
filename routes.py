@@ -41,10 +41,10 @@ def configure_routes(app):
             configuration = next((config for config in configurations if config['name'] == config_name), None)
             if configuration:
                 # Set the LEDs
-                colors = [(255, 0, 0) if button['color'] == 'red' else (0, 255, 0) if button['color'] == 'blue' else (255, 255, 0) for button in configuration['buttons']]
+                colors = [(255, 0, 0) if button['color'] == 'red' else (0, 255, 0) if button['color'] == 'blue' else (255, 255, 0) if button['color'] == 'yellow' else (0, 0, 0) for button in configuration['buttons']]
                 set_leds(colors)
-
                 return jsonify(configuration)
+            
             else:
                 return jsonify({'error': 'Configuration not found'}), 404
         except Exception as e:
