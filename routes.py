@@ -1,6 +1,7 @@
 # routes.py
 from flask import render_template, request, jsonify
 from configurations import get_configurations, save_configurations, is_unique_name
+import traceback
 
 def configure_routes(app):
     @app.route('/')
@@ -64,4 +65,6 @@ def configure_routes(app):
             else:
                 return jsonify({'error': 'Configuration not found'}), 404
         except Exception as e:
+            print("Exception occurred:", e)
+            print(traceback.format_exc())  # Print the full exception details including the stack trace
             return jsonify({'error': str(e)}), 500
