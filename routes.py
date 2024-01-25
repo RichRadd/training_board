@@ -42,7 +42,7 @@ def configure_routes(app):
             configuration = next((config for config in configurations if config['name'] == config_name), None)
             print("Configuration:", configuration)
             if configuration:
-                # Convert color names to RGB values
+                # Convert color names to GRB values
                 color_map = {'red': (0, 255, 0), 'green': (0, 255, 0), 'blue': (0, 0, 255), 'yellow': (255, 255, 0)}
                 for button in configuration['buttons']:
                     try:
@@ -55,6 +55,7 @@ def configure_routes(app):
                 print("Setting LEDs...")
                 set_leds(configuration['buttons'])
                 print("LEDs set")
+                print("Returning configuration:", configuration)  # Print the configuration before returning it
                 return jsonify(configuration)
             else:
                 return jsonify({'error': 'Configuration not found'}), 404
