@@ -86,6 +86,14 @@ def configure_routes(app):
             data = request.json
             # Print the buttons data
             print("Buttons:", data['buttons'])
+            # Convert color names to GRB values
+            color_map = {'red': (0, 255, 0), 'green': (255, 0, 0), 'blue': (0, 0, 255), 'yellow': (255, 255, 0)}
+            for button in data['buttons']:
+                try:
+                    button['color'] = color_map[button['color']]
+                except KeyError:
+                    print(f"Error: Color {button['color']} not found in color_map")
+                    raise
             # Light up the LEDs
             from lightled import set_leds
             print("Setting LEDs...")
