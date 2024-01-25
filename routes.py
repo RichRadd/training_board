@@ -65,3 +65,17 @@ def configure_routes(app):
                 return jsonify({'error': 'Configuration not found'}), 404
         except Exception as e:
             return jsonify({'error': str(e)}), 500
+
+    @app.route('/delete_configuration/<config_name>', methods=['DELETE'])
+    def delete_configuration(config_name):
+        try:
+            configurations = get_configurations()
+            configurations = [config for config in configurations if config['name'] != config_name]
+            save_configurations(configurations)
+            return jsonify({'success': True})
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+
+    @app.route('/delete')
+    def delete():
+        return render_template('delete.html')
