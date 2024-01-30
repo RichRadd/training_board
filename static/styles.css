@@ -3,7 +3,8 @@ button {
     height: 30px;
     margin: 0;
     background-color: transparent;
-    border: 2px solid #fff; /* This adds a 2px solid dark grey border */
+    border: 1px solid #fff; /* This is the white border */
+    box-shadow: 0 0 0 1px #000; /* This adds a 1px black border outside the existing border */
     transition: background-color 0.3s ease;
 }
 
@@ -13,7 +14,7 @@ button {
     gap: 5px;
     width: {{ cols * 30 + (cols - 1) * 5 }}px;
     background-image: url('/static/images/f5.jpg'); /* Replace with the path to your image */
-    background-size: cover; /* This will stretch the image to cover the entire container */
+    background-size: contain; /* This will stretch the image to cover the entire container */
     background-repeat: no-repeat; /* This will prevent the image from repeating */
 }
 
