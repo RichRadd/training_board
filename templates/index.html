@@ -45,9 +45,9 @@
             {% set reversed_row = rows - row - 1 %}
             {% for col in range(cols) %}
                 {% if reversed_row is even %}
-                    {% set button_number = reversed_row * cols + col %}
+                    {% set button_number = reversed_row * cols + col + 1 %}
                 {% else %}
-                    {% set button_number = reversed_row * cols + (cols - col - 1) %}
+                    {% set button_number = reversed_row * cols + (cols - col - 1) +1 %}
                 {% endif %}
                 <button id="button{{ button_number }}" onclick="circleClick({{ button_number }})"></button>
             {% endfor %}
