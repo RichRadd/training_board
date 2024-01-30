@@ -184,7 +184,7 @@ function testConfiguration() {
     })
     .then(response => response.json())
     .then(data => {
-        alert('Configuration tested successfully.');
+       // alert('Configuration tested successfully.');
     })
     .catch(error => {
         console.error('Error:', error);
