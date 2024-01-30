@@ -1,14 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete Configuration</title>
-    <script src="delete.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <h1>Delete Configuration</h1>
-    <form id="delete-form">
-        <select id="config-dropdown"></select>
-        <button type="submit">Delete</button>
-    </form>
+
+    <label for="config-dropdown">Select Configuration:</label>
+    <select id="config-dropdown"></select>
+
+    <button id="delete-button" onclick="confirmDelete()">Delete Configuration</button>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+    function confirmDelete() {
+        var configDropdown = document.getElementById('config-dropdown');
+        var selectedConfig = configDropdown.value;
+
+        if (!selectedConfig) {
+            alert('Please select a configuration to delete.');
+            return;
+        }
+
+        var confirmed = confirm('Are you sure you want to delete the "' + selectedConfig + '" configuration?');
+        if (confirmed) {
+            deleteConfiguration();
+        }
+    }
+    </script>
 </body>
 </html>

@@ -13,6 +13,13 @@ function circleClick(buttonNumber) {
     }
 }
 
+function confirmSave() {
+    var confirmed = confirm('Have you tested the climb, and are happy to save it?');
+    if (confirmed) {
+        saveConfiguration();
+    }
+}
+
 function saveConfiguration() {
     var configNameInput = document.getElementById('config-name-input');
     var gradeInput = document.getElementById('grade-input');
@@ -121,6 +128,67 @@ function loadConfiguration() {
         .catch(error => {
             console.error('Error:', error);
         });
+}
+
+
+function deleteConfiguration() {
+    var configDropdown = document.getElementById('config-dropdown');
+    var selectedConfig = configDropdown.value;
+
+    if (!selectedConfig) {
+        alert('Please select a configuration to delete.');
+        return;
+    }
+
+    fetch(`/delete_configuration/${encodeURIComponent(selectedConfig)}`, {
+        method: 'DELETE',
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Configuration deleted successfully.');
+            loadConfigurations();
+        } else {
+            alert('Error deleting configuration: ' + data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+function testConfiguration() {
+    var illuminatedButtonsYellow = document.querySelectorAll('.illuminated-yellow');
+    var illuminatedButtonsBlue = document.querySelectorAll('.illuminated-blue');
+    var illuminatedButtonsRed = document.querySelectorAll('.illuminated-red');
+
+    var illuminatedButtonsArray = Array.from(illuminatedButtonsYellow).map(button => {
+        return { id: button.id.replace('button', ''), color: 'yellow' };
+    }).concat(Array.from(illuminatedButtonsBlue).map(button => {
+        return { id: button.id.replace('button', ''), color: 'blue' };
+    })).concat(Array.from(illuminatedButtonsRed).map(button => {
+        return { id: button.id.replace('button', ''), color: 'red' };
+    }));
+
+    var configuration = {
+        buttons: illuminatedButtonsArray
+    };
+
+    // Send the configuration to the server
+    fetch('/test_configuration', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(configuration),
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('Configuration tested successfully.');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
 
 // Load configurations on page load
