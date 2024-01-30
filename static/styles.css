@@ -14,7 +14,7 @@ button {
     gap: 5px;
     width: {{ cols * 30 + (cols - 1) * 5 }}px;
     background-image: url('/static/images/f5.jpg'); /* Replace with the path to your image */
-    background-size: contain; /* This will stretch the image to cover the entire container */
+    background-size: 100% 100%; /* This will stretch the image to fill the entire container */
     background-repeat: no-repeat; /* This will prevent the image from repeating */
 }
 
