@@ -6,6 +6,16 @@ button {
     transition: background-color 0.3s ease;
 }
 
+#button-container {
+    display: grid;
+    grid-template-columns: repeat({{ cols }}, 30px);
+    gap: 5px;
+    width: {{ cols * 30 + (cols - 1) * 5 }}px;
+    background-image: url('static/images/f5.jpg'); /* Replace with the path to your image */
+    background-size: cover; /* This will stretch the image to cover the entire container */
+    background-repeat: no-repeat; /* This will prevent the image from repeating */
+}
+
 .illuminated-yellow {
     background-color: yellow;
 }
