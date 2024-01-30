@@ -1,5 +1,6 @@
 # lightled.py
 import time
+import threading
 from rpi_ws281x import Color, Adafruit_NeoPixel
 
 # LED strip configuration:
@@ -15,8 +16,18 @@ strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, 
 # Intialize the library (must be called once before other functions).
 strip.begin()
 
+stop_thread = threading.Event()
+
+def continuously_show():
+    while not stop_thread.is_set():
+        strip.show()
+        time.sleep(1)
+
 def set_leds(buttons):
     """Set the LEDs to the specified colors."""
+    # Stop the thread that continuously shows the LEDs
+    stop_thread.set()
+    
     # Turn off all pixels
     for i in range(strip.numPixels()):
         strip.setPixelColor(i, Color(0, 0, 0))
@@ -33,7 +44,9 @@ def set_leds(buttons):
             strip.setPixelColor(led_id, color_int)
         except Exception as e:
             print(f"Error setting LED {led_id} to color {rgb}: {e}")
-            raise
-        
-    strip.show()
+            raise    
+
+    # Start the thread that continuously shows the LEDs
+    stop_thread.clear()
+    threading.Thread(target=continuously_show).start()
     
