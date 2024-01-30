@@ -2,7 +2,8 @@ button {
     width: 30px;
     height: 30px;
     margin: 0;
-    background-color: white;
+    background-color: transparent;
+    border: 2px solid #fff; /* This adds a 2px solid dark grey border */
     transition: background-color 0.3s ease;
 }
 
@@ -11,21 +12,21 @@ button {
     grid-template-columns: repeat({{ cols }}, 30px);
     gap: 5px;
     width: {{ cols * 30 + (cols - 1) * 5 }}px;
-    background-image: url('static/images/f5.jpg'); /* Replace with the path to your image */
+    background-image: url('/static/images/f5.jpg'); /* Replace with the path to your image */
     background-size: cover; /* This will stretch the image to cover the entire container */
     background-repeat: no-repeat; /* This will prevent the image from repeating */
 }
 
 .illuminated-yellow {
-    background-color: yellow;
+    background-color: rgba(255, 255, 0, 0.5); /* Yellow with 50% transparency */
 }
 
 .illuminated-blue {
-    background-color: blue;
+    background-color: rgba(0, 0, 255, 0.5); /* Blue with 50% transparency */
 }
 
 .illuminated-red {
-    background-color: red;
+    background-color: rgba(255, 0, 0, 0.5); /* Red with 50% transparency */
 }
 
 #config-name-input, #grade-input {
