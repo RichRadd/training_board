@@ -6,7 +6,7 @@ import traceback
 def configure_routes(app):
     @app.route('/')
     def index():
-        rows = 15
+        rows = 21
         cols = 12
         return render_template('index.html', rows=rows, cols=cols)
     
