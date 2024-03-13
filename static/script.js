@@ -34,8 +34,8 @@ function saveConfiguration() {
     var illuminatedButtonsBlue = document.querySelectorAll('.illuminated-blue');
     var illuminatedButtonsRed = document.querySelectorAll('.illuminated-red');
 
-    if (illuminatedButtonsBlue.length != 2 || illuminatedButtonsRed.length != 1) {
-        alert('You must have exactly 2 blue highlights and 1 red highlight.');
+    if (illuminatedButtonsBlue.length < 1 || illuminatedButtonsBlue.length > 2 || illuminatedButtonsRed.length != 1) {
+        alert('You must have either 1 or 2 start holds (blue) and 1 end hold (red).');
         return;
     }
 
