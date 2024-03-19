@@ -21,6 +21,7 @@ stop_thread = threading.Event()
 def continuously_show():
     while not stop_thread.is_set():
         strip.show()
+        time.sleep(0.1)
 
 def set_leds(buttons):
     """Set the LEDs to the specified colors."""

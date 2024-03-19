@@ -2,6 +2,7 @@
 from flask import Flask, render_template
 from routes import configure_routes
 
+
 data = {
     "name": "f5 light up", 
     "grade": "V0", 
