@@ -1,16 +1,33 @@
+window.onload = function() {
+    var buttons = document.querySelectorAll('#button-container button');
+    buttons.forEach(function(button) {
+        var buttonNumber = button.id.replace('button', '');
+        var color = localStorage.getItem('button' + buttonNumber);
+        if (color) {
+            button.classList.add(color);
+        }
+    });
+};
+
 function circleClick(buttonNumber) {
     var button = document.getElementById('button' + buttonNumber);
+    var color = '';
     if (button.classList.contains('illuminated-yellow')) {
         button.classList.remove('illuminated-yellow');
         button.classList.add('illuminated-blue');
+        color = 'illuminated-blue';
     } else if (button.classList.contains('illuminated-blue')) {
         button.classList.remove('illuminated-blue');
         button.classList.add('illuminated-red');
+        color = 'illuminated-red';
     } else if (button.classList.contains('illuminated-red')) {
         button.classList.remove('illuminated-red');
+        color = '';
     } else {
         button.classList.add('illuminated-yellow');
+        color = 'illuminated-yellow';
     }
+    localStorage.setItem('button' + buttonNumber, color);
 }
 
 function confirmSave() {
